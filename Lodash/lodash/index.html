@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.core.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+    <script src="data.json" charset="utf-8"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        //skills
+        let skills = [];
+        _.map(data, function(data){
+            _.forEach(data.skills, function(e){
+                skills.push(e);
+            })
+        })
+        skills = _.toLower(skills);
+        skills = skills.split(',')
+        skills = _.uniq(skills);
+        skills = _.sortBy(skills);
+        console.log(skills)
+
+        //name
+        let names = _.map(data, function(data){
+            return [data.name, data.friends.length]
+        })
+        names = _.sortBy(names, function(index){
+            return index[1];
+        })
+        console.log(names)
+
+        //friends
+        let friends = [];
+        _.map(data, function(data){
+            _.forEach(data.friends, function(f){
+                friends.push(f.name);
+            })
+        })
+        friends = _.uniq(friends)
+        console.log(friends)
+    </script>
+</body>
+</html>
